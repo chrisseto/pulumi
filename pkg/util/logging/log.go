@@ -29,7 +29,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/golang/glog"
+	"k8s.io/klog"
 )
 
 type Filter interface {
@@ -43,24 +43,24 @@ var LogFlow = false     // true to flow logging settings to child processes.
 var rwLock sync.RWMutex
 var filters []Filter
 
-func V(level glog.Level) glog.Verbose {
-	return glog.V(level)
+func V(level klog.Level) klog.Verbose {
+	return klog.V(level)
 }
 
 func Errorf(format string, args ...interface{}) {
-	glog.Errorf("%s", FilterString(fmt.Sprintf(format, args...)))
+	klog.Errorf("%s", FilterString(fmt.Sprintf(format, args...)))
 }
 
 func Infof(format string, args ...interface{}) {
-	glog.Infof("%s", FilterString(fmt.Sprintf(format, args...)))
+	klog.Infof("%s", FilterString(fmt.Sprintf(format, args...)))
 }
 
 func Warningf(format string, args ...interface{}) {
-	glog.Warningf("%s", FilterString(fmt.Sprintf(format, args...)))
+	klog.Warningf("%s", FilterString(fmt.Sprintf(format, args...)))
 }
 
 func Flush() {
-	glog.Flush()
+	klog.Flush()
 }
 
 // InitLogging ensures the logging library has been initialized with the given settings.
@@ -70,7 +70,9 @@ func InitLogging(logToStderr bool, verbose int, logFlow bool) {
 	Verbose = verbose
 	LogFlow = logFlow
 
-	// glog uses golang's built in flags package to set configuration values, which is incompatible with how
+	klog.InitFlags(nil)
+
+	// klog uses golang's built in flags package to set configuration values, which is incompatible with how
 	// we use cobra. In order to accommodate this, we call flag.CommandLine.Parse() with an empty array and
 	// explicitly set the flags we care about here.
 	if !flag.Parsed() {

@@ -19,7 +19,6 @@ require (
 	github.com/docker/docker v0.0.0-20170504205632-89658bed64c2
 	github.com/dustin/go-humanize v1.0.0
 	github.com/gofrs/flock v0.7.0
-	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	github.com/golang/protobuf v1.3.1
 	github.com/google/go-querystring v1.0.0
 	github.com/gorilla/context v1.1.1 // indirect
@@ -70,6 +69,7 @@ require (
 	gopkg.in/src-d/go-git-fixtures.v3 v3.4.0 // indirect
 	gopkg.in/src-d/go-git.v4 v4.8.1
 	gopkg.in/yaml.v2 v2.2.2
+	k8s.io/klog v1.0.0
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0
 	sourcegraph.com/sourcegraph/appdash-data v0.0.0-20151005221446-73f23eafcf67 // indirect
 )
